@@ -3,16 +3,14 @@ import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Route
 import { Observable } from 'rxjs';
 import {AuthService} from '../../shared/services/auth.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private auth: AuthService,
               private router: Router) {
   }
   canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if (this.auth.isAuthenticated()) {
       return true;
     } else {
@@ -21,8 +19,7 @@ export class AuthGuard implements CanActivate {
         queryParams: {
           loginAgain: true
         }
-      })
-      return false;
+      });
     }
   }
 
