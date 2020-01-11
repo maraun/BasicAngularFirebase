@@ -22,6 +22,9 @@ export class LoginPageComponent implements OnInit {
       if (params['loginAgain']) {
         this.message = 'Please, Log in again';
       }
+      if (params['authFailed']) {
+        this.message = 'Please, Log in again, session ended';
+      }
     })
     this.form = new FormGroup({
       email: new FormControl(null, [Validators.email, Validators.required]),

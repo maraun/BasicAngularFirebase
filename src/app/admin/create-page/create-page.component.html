@@ -1,4 +1,4 @@
-<form>
+<form [formGroup]="form" (ngSubmit)="submit()">
   <h1>Create new post</h1>
   <div class="form-control" [ngClass]="{invalid: form.get('title').touched && form.get('title').invalid}">
     <label for="title">Title:</label>
@@ -8,10 +8,15 @@
     </div>
   </div>
   <div class="form-control" [ngClass]="{invalid: form.get('author').touched && form.get('author').invalid}">
-    <label for="author">Title:</label>
+    <label for="author">Author:</label>
     <input type="text" id="author" formControlName="author">
     <div *ngIf="form.get('author').touched && form.get('author').invalid" class="validation">
       <small *ngIf="form.get('author').errors.required">Enter author</small>
     </div>
   </div>
+  <div class="form-control">
+    <label for="text">Text: </label>
+    <quill-editor formControlName="text" id="text"></quill-editor>
+  </div>
+  <button type="submit" class="btn btn-block btn-dark" [disabled]="form.invalid">Create post</button>
 </form>
